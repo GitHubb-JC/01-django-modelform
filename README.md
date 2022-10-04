@@ -18,3 +18,9 @@ $ source venv/Scripts/activate
 $ pip install django==3.2.13
 $ pip freeze > requirements.txt
 ```
+
+### 3. Django 프로젝트 생성
+
+```bash
+$ django-admin startproject pjt .
+```
