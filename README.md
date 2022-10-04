@@ -33,6 +33,10 @@ $ django-admin startproject pjt .
 
 ### 3. urls.py 설정 
 
-## 3. Index
+## 3. Model 정의 (DB 설계)
 
-> url을 등록하고, view 함수 생성, template 만든다.
+### 1. 클래스 정의
+
+### 2. 마이그레이션 파일 생성
+
+### 3. DB 반영(`migrate`)
