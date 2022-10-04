@@ -30,3 +30,9 @@ $ django-admin startproject pjt .
 ### 1. app 생성
 
 ### 2. app 등록
+
+### 3. urls.py 설정 
+
+## 3. Index
+
+> url을 등록하고, view 함수 생성, template 만든다.
