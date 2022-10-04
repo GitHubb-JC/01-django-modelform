@@ -45,7 +45,7 @@ $ django-admin startproject pjt .
 
 ### 1. 게시글 생성
 
-> 사용자에게 HTML Form 제공, 입력받은 데이터를 처리 
+> 사용자에게 HTML Form 제공, 입력받은 데이터를 처리 (ModelForm 로직으로 변경)
 
 #### 1. HTML Form 제공
 
@@ -60,3 +60,11 @@ $ django-admin startproject pjt .
 ### 2. 게시글 목록
 
 > DB에서 게시글을 가져와서, template에 전달
+
+### 3. 상세보기
+
+> 특정한 글을 본다.
+
+> http://127.0.0.1:8000/articles/<int:pk>/
+
+### 4. 수정하기
