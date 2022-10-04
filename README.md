@@ -24,3 +24,9 @@ $ pip freeze > requirements.txt
 ```bash
 $ django-admin startproject pjt .
 ```
+
+## 2. articles app 
+
+### 1. app 생성
+
+### 2. app 등록
