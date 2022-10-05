@@ -1,7 +1,7 @@
+{% extends 'base.html' %}
 {% load django_bootstrap5 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
 
+{% block body %} 
 <h1>글쓰기</h1>
 
 <!-- form : 사용자에게 양식을 제공하고 
@@ -18,3 +18,4 @@
   <textarea name="content" id="content" cols="30" rows="10" required></textarea> -->
   {% bootstrap_button button_type="submit" content="OK" %}
 </form>
+{% endblock %}
