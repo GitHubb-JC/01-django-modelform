@@ -4,7 +4,6 @@ from .models import Article
 # Register your models here.
 # https://docs.djangoproject.com/en/3.2/intro/tutorial07/
 class ArticleAdmin(admin.ModelAdmin):
-    fields = ['title']
+    list_display  = ('title', 'created_at', 'updated_at')
 
 admin.site.register(Article, ArticleAdmin)
-
