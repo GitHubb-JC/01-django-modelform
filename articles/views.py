@@ -40,7 +40,7 @@ def create(request):
     context = {
         'article_form': article_form
     }
-    return render(request, 'articles/new.html', context=context)
+    return render(request, 'articles/form.html', context=context)
 
 def detail(request, pk):
     # 특정 글을 가져온다.
@@ -67,4 +67,4 @@ def update(request, pk):
     context = {
         'article_form': article_form
     }
-    return render(request, 'articles/update.html', context)
+    return render(request, 'articles/form.html', context)
