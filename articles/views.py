@@ -23,14 +23,6 @@ def index(request):
 
 def create(request):
     if request.method == 'POST':
-        # title = request.POST.get('title')
-        # content = request.POST.get('post')
-        # Article.objects.create(
-        #     title=request.POST.get('title'),
-        #     content=request.POST.get('content')
-        # )
-
-        # DB에 저장하는 로직
         article_form = ArticleForm(request.POST)
         if article_form.is_valid():
             article_form.save()
