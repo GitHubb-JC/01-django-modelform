@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'articles',
     'accounts',
     'django_bootstrap5',
+    'django_extensions',
     'django.contrib.admin', # 관리자
     'django.contrib.auth', # 유저/인증
     'django.contrib.contenttypes',
