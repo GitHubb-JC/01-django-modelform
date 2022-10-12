@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 # from .models import User 
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.forms import AuthenticationForm
 # from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm
@@ -11,7 +12,8 @@ def signup(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save() # ModelForm의 save 메서드의 리턴값은 해당 모델의 인스턴스다!
+            auth_login(request, user) # 로그인
             return redirect('articles:index')
     else:   
         form = CustomUserCreationForm()
@@ -45,3 +47,7 @@ def login(request):
         'form': form
     }
     return render(request, 'accounts/login.html', context)
+
+def logout(request):
+    auth_logout(request)
+    return redirect('articles:index')
