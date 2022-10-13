@@ -5,7 +5,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.forms import AuthenticationForm
 # from django.contrib.auth.forms import UserCreationForm
-from .forms import CustomUserCreationForm
+from .forms import CustomUserChangeForm, CustomUserCreationForm
 
 # Create your views here.
 def signup(request):
@@ -51,3 +51,10 @@ def login(request):
 def logout(request):
     auth_logout(request)
     return redirect('articles:index')
+
+def update(request):
+    form = CustomUserChangeForm(instance=request.user)
+    context = {
+        'form': form
+    }
+    return render(request, 'accounts/update.html', context)
