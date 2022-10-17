@@ -50,7 +50,7 @@ def update(request, pk):
     article = Article.objects.get(pk=pk)
     if request.method == 'POST':
         # POST : input 값 가져와서, 검증하고, DB에 저장
-        article_form = ArticleForm(request.POST, instance=article)
+        article_form = ArticleForm(request.POST, request.FILES, instance=article)
         if article_form.is_valid():
             # 유효성 검사 통과하면 저장하고, 상세보기 페이지로
             article_form.save()
