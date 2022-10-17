@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Article
 from .forms import ArticleForm
@@ -28,6 +29,7 @@ def create(request):
         article_form = ArticleForm(request.POST, request.FILES)
         if article_form.is_valid():
             article_form.save()
+            messages.success(request, '글 작성이 완료되었습니다.')
             return redirect('articles:index')
     else: 
         article_form = ArticleForm()
@@ -54,6 +56,7 @@ def update(request, pk):
         if article_form.is_valid():
             # 유효성 검사 통과하면 저장하고, 상세보기 페이지로
             article_form.save()
+            messages.success(request, '글이 수정되었습니다.')
             return redirect('articles:detail', article.pk)
         # 유효성 검사 통과하지 않으면 => context 부터해서 오류메시지 담긴 article_form을 랜더링
     else:

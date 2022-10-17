@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 # from .models import User 
+from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
@@ -51,6 +52,7 @@ def login(request):
 
 def logout(request):
     auth_logout(request)
+    messages.warning(request, '로그아웃 하였습니다.')
     return redirect('articles:index')
 
 @login_required
