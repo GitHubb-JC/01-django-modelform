@@ -43,7 +43,8 @@ def detail(request, pk):
     article = Article.objects.get(pk=pk)
     # template에 객체 전달
     context = {
-        'article': article
+        'article': article,
+        'comments': article.comment_set.all(),
     }
     return render(request, 'articles/detail.html', context)
 

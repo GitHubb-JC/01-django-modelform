@@ -8,4 +8,12 @@
     <img src="{{ article.image.url }}" alt="{{ article.image }}" width="400" height="300">
 {% endif %}
 <a href="{% url 'articles:update' article.pk %}">수정하기</a>
+<h4 class="my-3">댓글</h4>
+<hr>
+{% for comment in comments %}
+    <p>{{ comment.content }}</p>
+    <hr>    
+{% empty %}
+    <p>댓글이 없어요 ㅠ_ㅠ</p>
+{% endfor %}
 {% endblock %}
