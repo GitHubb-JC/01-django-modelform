@@ -10,6 +10,8 @@ from django.db import models
 - 글 작성시간/수정시간(자동으로 기록, 날짜/시간)
 '''
 # 1. 모델 설계 (DB 스키마 설계)
+from django.conf import settings
+
 class Article(models.Model):
     title = models.CharField(max_length=20)
     content = models.TextField()
@@ -19,6 +21,7 @@ class Article(models.Model):
                                 processors=[ResizeToFill(1200, 960)],
                                 format='JPEG',
                                 options={'quality': 80})
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
                             
 class Comment(models.Model):
     content = models.TextField()
