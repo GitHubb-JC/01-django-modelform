@@ -83,11 +83,13 @@ def update(request, pk):
         messages.warning(request, '작성자만 수정할 수 있습니다.')
         return redirect('articles:detail', article.pk)
 
+@login_required
 def comment_create(request, pk):
     article = Article.objects.get(pk=pk)
     comment_form = CommentForm(request.POST)
     if comment_form.is_valid():
         comment = comment_form.save(commit=False)
         comment.article = article
+        comment.user = request.user
         comment.save()
     return redirect('articles:detail', article.pk)
