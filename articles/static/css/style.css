@@ -5,3 +5,7 @@
     background-position: center;
     filter: blur(5);
 }
+
+.like-heart {
+    text-decoration: none !important;
+}

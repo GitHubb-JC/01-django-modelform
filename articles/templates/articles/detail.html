@@ -5,6 +5,15 @@
 <h1>{{ article.title }}</h1>
 <p>{{ article.pk }}번 게시글 | <a href="{% url 'accounts:detail' article.user.pk %}">{{ article.user.username }}</a></p>
 <p>{{ article.created_at|date:"SHORT_DATETIME_FORMAT" }} | {{ article.updated_at|date:"y-m-d D" }}</p>
+<span>
+{% if request.user.is_authenticated %}
+  <a class="like-heart" href="{% url 'articles:like' article.pk %}">
+  {% if request.user in article.like_users.all %}
+    <i class="bi bi-heart-fill"></i>
+  {% else %}
+    <i class="bi bi-heart"></i>
+  {% endif %}</a>{{ article.like_users.count }}</span>
+{% endif %}
 {% if request.user == article.user %}
 <p>
   <a href="{% url 'articles:update' article.pk %}">수정하기</a>
