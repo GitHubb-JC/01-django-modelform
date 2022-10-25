@@ -1,13 +1,15 @@
 from xml.etree.ElementTree import Comment
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST, require_safe
 from .models import Article
 from .forms import ArticleForm, CommentForm
 
 # Create your views here.
 
 # 요청 정보를 받아서..
+@require_safe
 def index(request):
     # 게시글을 가져와서..
     articles = Article.objects.order_by('-pk')
@@ -44,7 +46,7 @@ def create(request):
 
 def detail(request, pk):
     # 특정 글을 가져온다.
-    article = Article.objects.get(pk=pk)
+    article = get_object_or_404(Article, pk=pk)
     comment_form = CommentForm()
     # template에 객체 전달
     context = {
@@ -56,7 +58,7 @@ def detail(request, pk):
 
 @login_required
 def update(request, pk):
-    article = Article.objects.get(pk=pk)
+    article = get_object_or_404(Article, pk=pk)
     if request.user == article.user: 
         if request.method == 'POST':
             # POST : input 값 가져와서, 검증하고, DB에 저장
@@ -85,7 +87,7 @@ def update(request, pk):
 
 @login_required
 def comment_create(request, pk):
-    article = Article.objects.get(pk=pk)
+    article = get_object_or_404(Article, pk=pk)
     comment_form = CommentForm(request.POST)
     if comment_form.is_valid():
         comment = comment_form.save(commit=False)
@@ -96,7 +98,7 @@ def comment_create(request, pk):
 
 @login_required
 def like(request, pk):
-    article = Article.objects.get(pk=pk)
+    article = get_object_or_404(Article, pk=pk)
     # 만약에 로그인한 유저가 이 글을 좋아요를 눌렀다면,
     # if article.like_users.filter(id=request.user.id).exists():
     if request.user in article.like_users.all(): 

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 # from .models import User 
 from django.contrib import messages
 from django.contrib.auth import get_user_model
@@ -25,7 +25,7 @@ def signup(request):
     return render(request, 'accounts/signup.html', context)
 
 def detail(request, pk):
-    user = get_user_model().objects.get(pk=pk)
+    user = get_object_or_404(get_user_model(), pk=pk)
     context = {
         'user': user
     }
@@ -72,7 +72,7 @@ def update(request):
 @login_required
 def follow(request, pk):
     # 프로필에 해당하는 유저를 로그인한 유저가!
-    user = get_user_model().objects.get(pk=pk)
+    user = get_object_or_404(get_user_model(), pk=pk)
     if request.user == user:
         messages.warning(request, '스스로 팔로우 할 수 없습니다.')
         return redirect('accounts:detail', pk)
