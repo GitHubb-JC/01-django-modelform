@@ -1,4 +1,4 @@
-from xml.etree.ElementTree import Comment
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -87,6 +87,7 @@ def update(request, pk):
 
 @login_required
 def comment_create(request, pk):
+    print(request.POST)
     article = get_object_or_404(Article, pk=pk)
     comment_form = CommentForm(request.POST)
     if comment_form.is_valid():
@@ -94,10 +95,13 @@ def comment_create(request, pk):
         comment.article = article
         comment.user = request.user
         comment.save()
-    return redirect('articles:detail', article.pk)
-
-
-from django.http import JsonResponse
+        context = {
+            'content': comment.content,
+            'userName': comment.user.username
+        }
+        return JsonResponse(context)
+    # else:
+    #     return Re
 
 @login_required
 def like(request, pk):
