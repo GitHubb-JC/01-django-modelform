@@ -96,6 +96,9 @@ def comment_create(request, pk):
         comment.save()
     return redirect('articles:detail', article.pk)
 
+
+from django.http import JsonResponse
+
 @login_required
 def like(request, pk):
     article = get_object_or_404(Article, pk=pk)
@@ -104,8 +107,11 @@ def like(request, pk):
     if request.user in article.like_users.all(): 
         # 좋아요 삭제하고
         article.like_users.remove(request.user)
+        is_liked = False
     else:
         # 좋아요 추가하고 
         article.like_users.add(request.user)
+        is_liked = True
     # 상세 페이지로 redirect
-    return redirect('articles:detail', pk)
+    context = {'isLiked': is_liked, 'likeCount': article.like_users.count()}
+    return JsonResponse(context)
